@@ -3,6 +3,7 @@ import 'package:flutter_application_1/screens/longTerm.dart';
 
 class LongTermTitleCard extends StatelessWidget {
   LongTermTitleCard(this.data);
+  var invest = 10000;
   var data;
   var fontcolor = Colors.white;
   @override
@@ -87,7 +88,7 @@ class LongTermTitleCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "10596.00",
+                            "$invest",
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 color: Colors.white,
@@ -107,13 +108,30 @@ class LongTermTitleCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "6.00",
+                            (() {
+                              if (data.length > 0) {
+                                double sum = 0.0;
+                                data.forEach((index) {
+                                  sum = sum + index.plper;
+                                });
+                                if (sum > 0) {
+                                  fontcolor = Colors.greenAccent;
+                                } else {
+                                  fontcolor = Colors.redAccent;
+                                }
+
+                                return sum.toString();
+                              } else {
+                                fontcolor = Colors.redAccent;
+                                return '0';
+                              }
+                            }()),
                             style: TextStyle(
                                 fontFamily: 'Poppins',
-                                color: Colors.white,
+                                color: fontcolor,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w500),
-                          )
+                          ),
                         ],
                       ),
                       Column(
@@ -127,13 +145,30 @@ class LongTermTitleCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "11010.00",
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500),
-                          )
+                      (() {
+                        if (data.length > 0) {
+                          double sum = double.parse(invest.toString());
+                          data.forEach((index) {
+                            sum = sum + index.pl;
+                          });
+                          if (sum > double.parse(invest.toString())) {
+                            fontcolor = Colors.greenAccent;
+                          } else {
+                            fontcolor = Colors.redAccent;
+                          }
+
+                          return sum.toString();
+                        } else {
+                          fontcolor = Colors.redAccent;
+                          return '0';
+                        }
+                      }()),
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          color: fontcolor,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500),
+                    ),
                         ],
                       ),
                     ],
